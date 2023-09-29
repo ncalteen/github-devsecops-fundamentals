@@ -195,3 +195,9 @@ invoked!
 1. Click the **Actions** tab
 1. Locate and open the currently-running **Continuous Deployment** action
 1. Click the **Deploy** step and review the log outputs
+
+In the logs, you should see a log line similar to the below:
+
+```plain
+
+```

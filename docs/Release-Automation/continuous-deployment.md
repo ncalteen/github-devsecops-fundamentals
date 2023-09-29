@@ -199,5 +199,12 @@ invoked!
 In the logs, you should see a log line similar to the below:
 
 ```plain
-
+INFO    -  Your documentation should shortly be available at: https://githubuniverseworkshops.github.io/github-devsecops-fundamentals/
 ```
+
+1. Open the link from the logs to view your site!
+
+## Next Steps
+
+Congratulations! You have now enabled continuous deployment to GitHub Pages!
+Next, it's time to configure [Release Management](./release-management.md).

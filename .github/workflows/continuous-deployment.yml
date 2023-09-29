@@ -51,3 +51,20 @@ jobs:
         id: deploy
         run: |
           poetry run mkdocs gh-deploy --force --theme material
+
+      # Get the version and update the tags to use in the release
+      - name: Tag Commit
+        id: tag-commit
+        uses: issue-ops/semver@v0.1.0
+        with:
+          manifest-path: pyproject.toml
+          workspace: ${{ github.workspace }}
+          ref: main
+
+      # Use the version output from the previous step for the release
+      # Prepend a 'v' to the beginning (e.g. 'v1.2.3')
+      - name: Create Release
+        id: create-release
+        uses: issue-ops/releaser@v0.1.1
+        with:
+          tag: v${{ steps.tag-commit.outputs.version }}

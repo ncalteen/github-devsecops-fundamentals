@@ -205,6 +205,13 @@ invoked! Similar to the previous section, this will update the site contents on
 GitHub Pages. It will also create a new release that can be used to download the
 latest contents of the repository as an artifact.
 
+## Step 7: Review the Release
+
+1. Click the **Code** tab of the repository
+1. Locate the **Releases** section
+1. Click the latest release
+1. Review the contents
+
 ## Next Steps
 
 Congratulations! You have now enabled continuous releases! Next, it's time to

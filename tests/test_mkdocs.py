@@ -8,7 +8,7 @@ import requests
 @pytest.fixture(scope="session", autouse=True)
 def start_mkdocs_server():
     # Start the server in a subprocess.
-    server = subprocess.Popen(["mkdocs", "serve"])
+    server = subprocess.Popen(["poetry", "run", "mkdocs", "serve"])
 
     # Give the server a second to start up.
     time.sleep(1)

@@ -25,6 +25,8 @@ jobs:
     # Only run if the PR was merged.
     if: ${{ github.event.pull_request.merged == true }}
 
+    environment: github-pages
+
     steps:
       - name: Checkout
         id: checkout

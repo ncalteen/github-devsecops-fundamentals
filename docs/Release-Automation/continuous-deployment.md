@@ -78,8 +78,8 @@ request (PR) is successfully reviewed and merged into our default branch,
            id: pages
            uses: actions/configure-pages@v3
 
-         # Deploy the updated content to the `gh-pages` branch and update the
-         # currently-running site.
+         # Deploy the updated content to the `github-pages` branch and update
+         # the currently-running site.
          - name: Deploy to GitHub Pages
            id: deploy
            run: |

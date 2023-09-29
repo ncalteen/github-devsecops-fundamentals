@@ -11,7 +11,7 @@ def start_mkdocs_server():
     server = subprocess.Popen(["poetry", "run", "mkdocs", "serve"])
 
     # Give the server a second to start up.
-    time.sleep(1)
+    time.sleep(5)
 
     yield server
 
@@ -20,7 +20,9 @@ def start_mkdocs_server():
 
 
 def test_mkdocs_static_page():
-    response = requests.get("http://localhost:8000")
+    response = requests.get(
+        "http://127.0.0.1:8000/pages/githubuniverseworkshops/github-devsecops-fundamentals/"
+    )
 
     assert response.status_code == 200
     assert "GitHub DevSecOps Fundamentals" in response.text

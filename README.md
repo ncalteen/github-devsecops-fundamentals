@@ -43,7 +43,7 @@ addressing the above concerns.
   - Securing the Software Supply Chain
   - Release Automation
 
-## :mega: Prerequisites
+## Prerequisites
 
 - A computer with internet access
 - A GitHub account

@@ -18,8 +18,8 @@ users approve any future changes to your site.
 ## Step 1: Update the Environment
 
 When GitHub Pages is enabled and first deployed for a repository, a separate
-environment named `gh-pages` is automatically created. Any deployments to your
-site will use this environment. In this scenario, suppose your organization
+environment named `github-pages` is automatically created. Any deployments to
+your site will use this environment. In this scenario, suppose your organization
 requires human review of changes to your public documentation. Here, you will
 modify environment settings to require approvals before deployments can take
 place.
@@ -27,7 +27,7 @@ place.
 1. Open your repository on GitHub.com
 1. Click the **Settings** tab
 1. Click **Environments**
-1. Click the **`gh-pages`** environment
+1. Click the **`github-pages`** environment
 1. Select the **Required reviewers** checkbox
 1. In the new input field, enter your GitHub handle
 
@@ -54,6 +54,95 @@ notification that this deployment is awaiting their review.
 1. Make some changes to the site
 1. In `pyproject.toml`, update the **version** field (e.g. change it from
    `0.1.0` to `0.2.0`)
+1. Open `.github/workflows/continuous-deployment.yml` for editing and modify it
+   to include the following contents:
+
+   ```yaml
+   name: Continuous Deployment
+
+   # Run this action when PRs targeting `main` are closed.
+   on:
+     pull_request:
+       types:
+         - closed
+       branches:
+         - main
+
+   # The following permissions are required to deploy to GitHub Pages.
+   permissions:
+     contents: write
+     pages: write
+     id-token: write
+
+   # If multiple PRs are merged around the same time, this will ensure all but
+   # the latest workflow run are cancelled, so that the latest content is
+   # deployed to GitHub Pages.
+   concurrency:
+     group: pages
+     cancel-in-progress: true
+
+   jobs:
+     deploy:
+       name: Deploy
+       runs-on: ubuntu-latest
+
+       environment: github-pages
+
+       # Only run if the PR was merged successfully.
+       if: ${{ github.event.pull_request.merged == true }}
+
+       steps:
+         # Checkout the repository onto the runner.
+         - name: Checkout
+           id: checkout
+           uses: actions/checkout@v4
+
+         # Install the same version of Python that is used in the project. Cache
+         # dependencies to reduce workflow run time.
+         - name: Setup Python
+           id: setup-python
+           uses: actions/setup-python@v4
+           with:
+             python-version: 3.11
+             cache: poetry
+
+         # Install/update any dependencies from the cache.
+         - name: Install Dependencies
+           id: install
+           run: |
+             pip install poetry
+             poetry install
+
+         # Configure GitHub Pages on the repository.
+         - name: Set up Pages
+           id: pages
+           uses: actions/configure-pages@v3
+
+         # Deploy the updated content to the `gh-pages` branch and update the
+         # currently-running site.
+         - name: Deploy to GitHub Pages
+           id: deploy
+           run: |
+             poetry run mkdocs gh-deploy --force --theme material
+
+         # Get the version and update the tags to use in the release
+         - name: Tag Commit
+           id: tag-commit
+           uses: issue-ops/semver@v0.1.0
+           with:
+             manifest-path: pyproject.toml
+             workspace: ${{ github.workspace }}
+             ref: main
+
+         # Use the version output from the previous step for the release
+         # Prepend a 'v' to the beginning (e.g. 'v1.2.3')
+         - name: Create Release
+           id: create-release
+           uses: issue-ops/releaser@v0.1.1
+           with:
+             tag: v${{ steps.tag-commit.outputs.version }}
+   ```
+
 1. Stage and commit your changes
 
    ```bash

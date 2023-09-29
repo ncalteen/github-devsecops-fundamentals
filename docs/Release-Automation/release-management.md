@@ -101,7 +101,7 @@ version numbering, see [Semantic Versioning](https://semver.org/).
          # Prepend a 'v' to the beginning (e.g. 'v1.2.3')
          - name: Create Release
            id: create-release
-           uses: issue-ops/releaser@v0.1.1
+           uses: issue-ops/releaser@v0.1.2
            with:
              tag: v${{ steps.tag-commit.outputs.version }}
    ```

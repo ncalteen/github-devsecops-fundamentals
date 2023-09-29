@@ -34,6 +34,12 @@ place.
    Feel free to enter a different user's handle and have them review the
    deployment instead!
 
+1. In the **Deployment branches** section, click **Remove** next to any allowed
+   branches
+
+   This way, when a pull request is merged from a feature branch, it can deploy
+   to GitHub Pages.
+
 1. Click **Save protection rules**
 
 Now that the environment protection rule is in place, try creating a new pull
@@ -182,3 +188,15 @@ Once you're ready, you can merge your PR into `main`.
 
 Once the PR is merged, the required reviewer(s) will receive an email
 notification that this deployment is awaiting their review.
+
+## Step 5: Approve the Deployment
+
+1. Navigate to the repository on GitHub.com
+1. Click the **Actions** tab
+1. Click the latest **Continuous Deployment** workflow run
+1. Click **Review deployments**
+1. Select the checkbox next to **github-pages**
+1. Click **Approve and deploy**
+
+At this point, you can monitor the progress of the deployment and continue
+updating your site.

@@ -1,12 +1,12 @@
 site_name: GitHub DevSecOps Fundamentals
-#site_url: https://github.com/pages/githubuniverseworkshops/github-devsecops-fundamentals
-#site_author: Igwe Kalu <igwejk@github.com>
+site_url: https://github.com/pages/githubuniverseworkshops/github-devsecops-fundamentals
+site_author: Igwe Kalu <igwejk@github.com>
 site_description: GitHub Universe 2023 | Workshop
 
 remote_name: origin
 remote_branch: github-pages
 
-#repo_url: https://github.com/githubuniverseworkshops/github-devsecops-fundamentals
+repo_url: https://github.com/githubuniverseworkshops/github-devsecops-fundamentals
 repo_name: GitHub
 
 theme:
@@ -100,3 +100,4 @@ nav:
           - Release Management: Release-Automation/release-management.md
           - Environment Management: Release-Automation/environment-management.md
           - Static Code Analysis: Release-Automation/static-code-analysis.md
+  - Tetris: Tetris/index.html

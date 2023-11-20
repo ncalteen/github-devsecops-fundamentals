@@ -12,7 +12,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 mkdocs = "^1.5.3"
-mkdocs-material = "^9.4.2"
+mkdocs-material = "^9.4.10"
 mkdocs-macros-plugin = "^1.0.4"
 mkdocs-minify-plugin = "^0.7.1"
 

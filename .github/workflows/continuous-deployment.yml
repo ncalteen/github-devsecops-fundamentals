@@ -57,7 +57,7 @@ jobs:
       # Get the version and update the tags to use in the release
       - name: Tag Commit
         id: tag
-        uses: issue-ops/semver@v0.1.0
+        uses: issue-ops/semver@v0.3.2
         with:
           manifest-path: pyproject.toml
           workspace: ${{ github.workspace }}
